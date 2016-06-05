@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
+<<<<<<< HEAD
   	render text: "chapter3"
+=======
+  	render text: 'hello chapter3'
+>>>>>>> static-pages
   end
 end
