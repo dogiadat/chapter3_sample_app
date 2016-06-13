@@ -1,9 +1,9 @@
 <h1>Framgia Vietnam</h1>
 
-<p>chào đại ca <%= @user.name %>,</p>
+<p><%= @user.name %>,</p>
 
 <p>
-mời đại ca ấn vào đây để kích hoạt tài khoản
+Click the lick below to activate your account
 </p>
 
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token,

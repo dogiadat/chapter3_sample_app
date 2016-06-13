@@ -1,5 +1,5 @@
 
-Chào đại ca <%= @user.name %>
+<%= @user.name %>
 
-Mời đại ca ấn vào đây để kích hoạt tài khoản
+Click the lick below to activate your account
 <%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
