@@ -33,3 +33,10 @@ users = User.order(:created_at).take(6)
   new_title = title.slice(0,1).capitalize + title.slice(1..-1)
   users.each { |user| user.microposts.create!(content: content, title: new_title) }
 end
+
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
