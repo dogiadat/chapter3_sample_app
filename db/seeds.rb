@@ -25,3 +25,11 @@ User.create!(name:  "Do Gia Dat",
               activated: true,
               activated_at: Time.zone.now)
 end
+
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence(5)
+  title = Faker::Lorem.word
+  new_title = title.slice(0,1).capitalize + title.slice(1..-1)
+  users.each { |user| user.microposts.create!(content: content, title: new_title) }
+end

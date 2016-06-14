@@ -4,11 +4,13 @@ class UsersController < ApplicationController
 	before_action :admin_user, only: :destroy
 
 	def index
-		@users = User.paginate(page: params[:page], per_page: 10)
+		@users = User.paginate(page: params[:page], per_page: 6)
+
 	end
 
 	def show
 		@user = User.find(params[:id])
+		@microposts = @user.microposts.paginate(page: params[:page], per_page: 8)
 	end
 
 	def new
@@ -55,8 +57,9 @@ class UsersController < ApplicationController
 	    redirect_to users_url
   	end
 
-  	
-
+  	def feed
+  		Micropost.where("user_id = ?", id)
+  	end
 
 	private
 		def user_params
@@ -64,14 +67,7 @@ class UsersController < ApplicationController
 				:password_confirmation)
 		end
 
-		#phai dang nhap de thuc hien update/edit
-		def logged_in_user
-	      unless logged_in?
-	      	store_location
-	        flash[:danger] = "Please log in."
-	        redirect_to login_url
-	      end
-	    end
+		
 
 	    #xac nhan dung user thi duoc update/edit
 	    def correct_user

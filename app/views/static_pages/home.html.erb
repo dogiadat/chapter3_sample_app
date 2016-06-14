@@ -1,4 +1,43 @@
 <% provide(:title,'Home') %>
+
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= gravatar_for current_user %>
+		<h1><%= current_user.name %></h1>
+		<span><%= link_to "view my profile", current_user %></span>
+		<span><%= pluralize(current_user.microposts.count, "micropost") %></span>
+      </section>
+      <section class="micropost_form">
+        <%= form_for(@micropost, html: { multipart: true }) do |f| %>
+		  <%= render 'shared/error_messages', object: f.object %>
+		  	<div class="field">
+		  	<%= f.text_field :title, placeholder: "Post's title", class: "form-control" %>
+		    <%= f.text_area :content, placeholder: "Compose new micropost...", class: "form-control" %>
+		  	</div>
+		  	<span class="picture">
+		    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+		  	</span>
+		  	<%= f.submit "Post", class: "btn btn-primary" %>
+		<% end %>
+		<script type="text/javascript">
+		  $('#micropost_picture').bind('change', function() {
+		    var size_in_megabytes = this.files[0].size/1024/1024;
+		    if (size_in_megabytes > 5) {
+		      alert('Maximum file size is 5MB. Please choose a smaller file.');
+		    }
+		  });
+		</script>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3>Micropost Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+<% else %>
+
 <div class="center jumbotron">
 
 	<h1>Framgia Vietnam</h1>
@@ -11,3 +50,4 @@
 <%= link_to image_tag("rails.png", alt: "Rails logo"),
             'http://rubyonrails.org/' %>
 
+<% end %>

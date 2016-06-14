@@ -8,6 +8,9 @@ gem 'bootstrap-sass'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog',                     '1.36.0'
 # Use sqlite3 as the database for Active Record
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
